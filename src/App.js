@@ -26,7 +26,7 @@ function App() {
     }
 
     // Build terrain
-    let numRocks = Math.floor(BOARD_HEIGHT * BOARD_WIDTH / 100);
+    let numRocks = Math.floor(BOARD_HEIGHT * BOARD_WIDTH / 200);
     for (let i = 0; i < numRocks; i++) {
       // Pick size and position
       let diameter = Math.floor(Math.random() * 3) + 1;
@@ -51,6 +51,7 @@ function App() {
       }
     }
 
+
     // Place initial life
     let i = 0;
     let limit = BOARD_WIDTH * BOARD_HEIGHT * INITIAL_LIFE_DENSITY;
@@ -73,7 +74,7 @@ function App() {
 
   useEffect(() => {
     // Set cycle timer
-    setTimeout(handleCycle, 100);
+    setTimeout(handleCycle, 200);
   },[cells])
 
   function handleCycle() {
@@ -83,19 +84,19 @@ function App() {
       for (let y = 0; y < BOARD_WIDTH; y++) {
         let count = countNeighbors(x,y);
         let status = cells[x][y];
-        if (status === CELL_LIFE) {
-          // Any live cell with 2-3 neighbors continues to live
-          // All other live cells die
-          if (!(count === 2 || count === 3)) {
-            c[x][y] = CELL_EMPTY;
+        if (status !== CELL_TERRAIN) {
+          if (status === CELL_LIFE) {
+            // Any live cell with 2-3 neighbors continues to live
+            // All other live cells die
+            if (count < 2 || count > 3) {
+              c[x][y] = CELL_EMPTY;
+            }
+          } else if (status === CELL_EMPTY) {
+            // Any dead cell with 3 live neighbors becomes a live cell
+            if (count === 3) {
+              c[x][y] = CELL_LIFE;
+            }
           }
-        } else if (status === CELL_EMPTY) {
-          // Any dead cell with 3 live neighbors becomes a live cell
-          if (count === 3) {
-            c[x][y] = CELL_LIFE;
-          }
-        } else {
-          c[x][y] = status;
         }
       }
     }
@@ -104,11 +105,10 @@ function App() {
 
   function countNeighbors(x, y) {
     let count = 0;
-    let checkX, checkY = 0;
 
     // start at 12 o'clock
-    checkX = x;
-    checkY = y - 1;
+    let checkX = x;
+    let checkY = y - 1;
     if (checkY >= 0) count += checkCell(checkX, checkY);
     checkX = x + 1;
     if (checkX < BOARD_WIDTH && checkY >= 0) count += checkCell(checkX, checkY);
@@ -119,7 +119,7 @@ function App() {
     checkX = x;
     if (checkY < BOARD_HEIGHT) count += checkCell(checkX, checkY);
     checkX = x - 1;
-    if (checkX >= 0 && checkY < BOARD_HEIGHT) count += checkCell(checkY, checkY);
+    if (checkX >= 0 && checkY < BOARD_HEIGHT) count += checkCell(checkX, checkY);
     checkY = y;
     if (checkX >= 0) count += checkCell(checkX, checkY);
     checkY = y - 1;

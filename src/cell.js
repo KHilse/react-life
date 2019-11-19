@@ -20,7 +20,7 @@ const Cell = props => {
                 cellClass = 'cell cell-empty';
             break
         default:
-                cellClass = 'cell cell-empty';
+                cellClass = 'cell cell-broken';
             break
     }
 

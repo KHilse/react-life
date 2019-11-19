@@ -6,4 +6,4 @@ export const BOARD_WIDTH = 60;
 export const BOARD_HEIGHT = 60;
 export const BOARD_DISPLAY_WIDTH = 600;
 export const BOARD_DISPLAY_HEIGHT = 600;
-export const INITIAL_LIFE_DENSITY = 0.2;
+export const INITIAL_LIFE_DENSITY = 0.1;

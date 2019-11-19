@@ -20,7 +20,7 @@ const Board = props => {
         for (let j = 0; j < props.height; j++) {
             (props.cells.length > 0) ? content = props.cells[i][j] : content = 0;
     
-            cellsArray.push(<Cell content={content} size={BOARD_DISPLAY_WIDTH / BOARD_WIDTH} />);
+            cellsArray.push(<Cell key={(i*BOARD_WIDTH+j).toString()} content={content} size={BOARD_DISPLAY_WIDTH / BOARD_WIDTH} />);
         }
     }
 
