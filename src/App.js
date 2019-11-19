@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Board from './board';
+import {
+  CELL_TERRAIN,
+  CELL_LIFE,
+  CELL_EMPTY,
+  BOARD_WIDTH,
+  BOARD_HEIGHT,
+  INITIAL_LIFE_DENSITY } from './constants';
 
-const CELL_EMPTY = 0;
-const CELL_LIFE = 1;
-const CELL_TERRAIN = 2;
 
-const BOARD_WIDTH = 5;
-const BOARD_HEIGHT = 5;
-const INITIAL_LIFE_DENSITY = 0.1;
 
 function App() {
 
@@ -24,7 +25,7 @@ function App() {
         c[i].push(CELL_EMPTY);
       }
     }
-
+    console.log(`built the board`);
     // Build terrain
     let numRocks = Math.floor(BOARD_HEIGHT * BOARD_WIDTH / 100);
     for (let i = 0; i < numRocks; i++) {
@@ -50,6 +51,7 @@ function App() {
         c[posX-1][posY-1] = CELL_TERRAIN;
       }
     }
+    console.log(`built the terrain`);
 
     // Place initial life
     let i = 0;
@@ -62,8 +64,10 @@ function App() {
         i++;
       }
     }
+    console.log(`Life placed`);
 
     setCells(c);
+    console.log(`c`, c);
   }, [])
 
   return (
