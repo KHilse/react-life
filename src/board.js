@@ -7,10 +7,9 @@ import {
 
 const Board = props => {
 
-    console.log(`cells`, props.cells)
+    // console.log(`board props cells`, props.cells)
     let content;
 
-    console.log(BOARD_DISPLAY_HEIGHT)
     let boardStyle = {
         width: BOARD_DISPLAY_WIDTH,
         height: BOARD_DISPLAY_HEIGHT
